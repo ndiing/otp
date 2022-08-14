@@ -1,0 +1,25 @@
+{
+  "name": "@ndiing/otp",
+  "version": "1.0.0",
+  "description": "Nodejs OTP module, implement HOTP and TOTP",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndiing/otp.git"
+  },
+  "keywords": [
+    "nodejs",
+    "otp",
+    "hotp",
+    "totp"
+  ],
+  "author": "ndiing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ndiing/otp/issues"
+  },
+  "homepage": "https://github.com/ndiing/otp#readme"
+}
