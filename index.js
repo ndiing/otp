@@ -1,4 +1,5 @@
-const crypto = require("crypto");
+const Crypto = require("@ndiing/crypto");
+const { URL2 } = require("@ndiing/fetch");
 
 /**
  * ### Install
@@ -7,156 +8,43 @@ const crypto = require("crypto");
  * ```
  * ### Usage
  * ```js
- *
- * // Appendix D - HOTP Algorithm: Test Values
- *
- * //    The following test data uses the ASCII string
- * //    "12345678901234567890" for the secret:
- *
- * //    Secret = 0x3132333435363738393031323334353637383930
- *
- * //    Table 1 details for each count, the intermediate HMAC value.
- *
- * //    Count    Hexadecimal HMAC-SHA-1(secret, count)
- * //    0        cc93cf18508d94934c64b65d8ba7667fb7cde4b0
- * //    1        75a48a19d4cbe100644e8ac1397eea747a2d33ab
- * //    2        0bacb7fa082fef30782211938bc1c5e70416ff44
- * //    3        66c28227d03a2d5529262ff016a1e6ef76557ece
- * //    4        a904c900a64b35909874b33e61c5938a8e15ed1c
- * //    5        a37e783d7b7233c083d4f62926c7a25f238d0316
- * //    6        bc9cd28561042c83f219324d3c607256c03272ae
- * //    7        a4fb960c0bc06e1eabb804e5b397cdc4b45596fa
- * //    8        1b3c89f65e6c9e883012052823443f048b4332db
- * //    9        1637409809a679dc698207310c8c7fc07290d9e5
- *
- * //    Table 2 details for each count the truncated values (both in
- * //    hexadecimal and decimal) and then the HOTP value.
- *
- * //                      Truncated
- * //    Count    Hexadecimal    Decimal        HOTP
- * //    0        4c93cf18       1284755224     755224
- * //    1        41397eea       1094287082     287082
- * //    2         82fef30        137359152     359152
- * //    3        66ef7655       1726969429     969429
- * //    4        61c5938a       1640338314     338314
- * //    5        33c083d4        868254676     254676
- * //    6        7256c032       1918287922     287922
- * //    7         4e5b397         82162583     162583
- * //    8        2823443f        673399871     399871
- * //    9        2679dc69        645520489     520489
- *
  * var options = {
- *     base: "hotp",
- *     secret: "12345678901234567890",
- *     count: 0,
- *     algorithm: "sha1",
- *     digit: 6,
+ *     type: "totp", // default
+ *     label: "label", // default
+ *     // secret, // pass your secret / generate new
+ *     encoding: "base32", // default
+ *     issuer: "issuer", // default
+ *     algorithm: "sha1", // default
+ *     digits: 6, // default
+ *     // counter,
+ *     period: 30, // default
  * };
  *
- * for (let i = 0; i < 10; i++) {
- *     options.count = i;
- *     var token = OTP.generate(options);
- *     console.log(token);
- * }
+ * // Create otpauth URL
+ * console.log(OTP.otpauth(options));
+ * // output
+ * // {
+ * //     type: 'totp',
+ * //     label: 'label',
+ * //     encoding: 'base32',
+ * //     issuer: 'issuer',
+ * //     algorithm: 'sha1',
+ * //     digits: 6,
+ * //     counter: undefined,
+ * //     period: 30,
+ * //     secret: 'KJUGMRJWOV2VKNTXOBYE',
+ * //     otpauth: 'otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6',
+ * //     qr: 'https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6'
+ * //   }
  *
- * // Appendix B.  Test Vectors
+ * // Generate token
+ * options.secret='KJUGMRJWOV2VKNTXOBYE'
+ * console.log(OTP.generate(options))
  *
- * //    This section provides test values that can be used for the HOTP time-
- * //    based variant algorithm interoperability test.
- *
- * //    The test token shared secrets use the following ASCII string values: Expand
- * // - HMAC-SHA1: "12345678901234567890" (20 bytes)
- * // - HMAC-SHA256: "12345678901234567890123456789012" (32 bytes)
- * // - HMAC-SHA512:
- * //   "1234567890123456789012345678901234567890123456789012345678901234" (64 bytes)  With Time Step X = 30, and the Unix epoch as
- * //    the initial value to count time steps, where T0 = 0, the TOTP
- * //    algorithm will display the following values for specified modes and
- * //    timestamps.
- *
- * //   +-------------+--------------+------------------+----------+--------+
- * //   |  Time (sec) |   UTC Time   | Value of T (hex) |   TOTP   |  Mode  |
- * //   +-------------+--------------+------------------+----------+--------+
- * //   |      59     |  1970-01-01  | 0000000000000001 | 94287082 |  SHA1  |
- * //   |             |   00:00:59   |                  |          |        |
- * //   |      59     |  1970-01-01  | 0000000000000001 | 46119246 | SHA256 |
- * //   |             |   00:00:59   |                  |          |        |
- * //   |      59     |  1970-01-01  | 0000000000000001 | 90693936 | SHA512 |
- * //   |             |   00:00:59   |                  |          |        |
- * //   |  1111111109 |  2005-03-18  | 00000000023523EC | 07081804 |  SHA1  |
- * //   |             |   01:58:29   |                  |          |        |
- * //   |  1111111109 |  2005-03-18  | 00000000023523EC | 68084774 | SHA256 |
- * //   |             |   01:58:29   |                  |          |        |
- * //   |  1111111109 |  2005-03-18  | 00000000023523EC | 25091201 | SHA512 |
- * //   |             |   01:58:29   |                  |          |        |
- * //   |  1111111111 |  2005-03-18  | 00000000023523ED | 14050471 |  SHA1  |
- * //   |             |   01:58:31   |                  |          |        |
- * //   |  1111111111 |  2005-03-18  | 00000000023523ED | 67062674 | SHA256 |
- * //   |             |   01:58:31   |                  |          |        |
- * //   |  1111111111 |  2005-03-18  | 00000000023523ED | 99943326 | SHA512 |
- * //   |             |   01:58:31   |                  |          |        |
- * //   |  1234567890 |  2009-02-13  | 000000000273EF07 | 89005924 |  SHA1  |
- * //   |             |   23:31:30   |                  |          |        |
- * //   |  1234567890 |  2009-02-13  | 000000000273EF07 | 91819424 | SHA256 |
- * //   |             |   23:31:30   |                  |          |        |
- * //   |  1234567890 |  2009-02-13  | 000000000273EF07 | 93441116 | SHA512 |
- * //   |             |   23:31:30   |                  |          |        |
- * //   |  2000000000 |  2033-05-18  | 0000000003F940AA | 69279037 |  SHA1  |
- * //   |             |   03:33:20   |                  |          |        |
- * //   |  2000000000 |  2033-05-18  | 0000000003F940AA | 90698825 | SHA256 |
- * //   |             |   03:33:20   |                  |          |        |
- * //   |  2000000000 |  2033-05-18  | 0000000003F940AA | 38618901 | SHA512 |
- * //   |             |   03:33:20   |                  |          |        |
- * //   | 20000000000 |  2603-10-11  | 0000000027BC86AA | 65353130 |  SHA1  |
- * //   |             |   11:33:20   |                  |          |        |
- * //   | 20000000000 |  2603-10-11  | 0000000027BC86AA | 77737706 | SHA256 |
- * //   |             |   11:33:20   |                  |          |        |
- * //   | 20000000000 |  2603-10-11  | 0000000027BC86AA | 47863826 | SHA512 |
- * //   |             |   11:33:20   |                  |          |        |
- * //   +-------------+--------------+------------------+----------+--------+
- *
- * //                             Table 1: TOTP Table
- *
- * var options = {
- *     base: "totp",
- *     algorithm: "sha1",
- *     digit: 6,
- *     // time: new Date(),
- *     epoch: 0,
- *     step: 30,
- * };
- *
- * let secs = [
- *     //
- *     59, //
- *     1111111109,
- *     1111111111,
- *     1234567890,
- *     2000000000,
- *     20000000000,
- * ];
- * for (let i = 0; i < secs.length; i++) {
- *     const sec = secs[i];
- *     options.time = sec;
- *
- *     // 20 bytes
- *     options.secret = "12345678901234567890";
- *     options.algorithm = "sha1";
- *     var token = OTP.generate(options);
- *     console.log(new Date(options.time * 1000), token);
- *
- *     // 32 bytes
- *     options.secret = "12345678901234567890123456789012";
- *     options.algorithm = "sha256";
- *     var token = OTP.generate(options);
- *     console.log(new Date(options.time * 1000), token);
- *
- *     // 64 bytes
- *     options.secret = "1234567890123456789012345678901234567890123456789012345678901234";
- *     options.algorithm = "sha512";
- *     var token = OTP.generate(options);
- *     console.log(new Date(options.time * 1000), token);
- * }
- *
+ * // Validate token
+ * options.secret='KJUGMRJWOV2VKNTXOBYE'
+ * var token = '185036'
+ * console.log(OTP.validate(token,options))
  * ```
  * @module otp
  */
@@ -172,23 +60,26 @@ class Generator {
      * @returns {String}
      */
     static hotp(options = {}) {
-        let { secret = "", count = 0, algorithm = "sha1", digit = 6 } = options;
+        let { secret, encoding = "ascii", counter = 0, algorithm = "sha1", digits = 6 } = options;
 
-        secret = Buffer.from(secret);
+        if (encoding == "base32") {
+            secret = Crypto.base32Decode(secret);
+        } else {
+            secret = Buffer.from(secret, encoding);
+        }
 
-        let data = Buffer.alloc(8);
-        data.writeUInt32BE(count, 4);
+        const data = Buffer.alloc(8);
+        data.writeUInt32BE(counter, 4);
 
-        const hmac = crypto.createHmac(algorithm, secret).update(data).digest("hex");
+        const hmac = Crypto.hmac(data, { algorithm, key: secret, encoding: "hex" });
 
         const offset = parseInt(hmac.charAt(hmac.length - 1), 16);
 
         let result = parseInt(hmac.substr(offset * 2, 2 * 4), 16);
         result = result & 0x7fffffff;
-        result = ("" + result).padStart(digit, 0);
-        result = result.slice(0 - digit);
+        result = ("" + result).padStart(digits, 0);
 
-        return result;
+        return result.substr(0 - digits);
     }
 
     /**
@@ -198,9 +89,9 @@ class Generator {
      * @returns {String}
      */
     static totp(options = {}) {
-        let { secret = "", time = new Date() / 1000, epoch = 0, step = 30, algorithm = "sha1", digit = 6 } = options;
-        const count = Math.floor((time - epoch) / step);
-        return this.hotp({ secret, count, algorithm, digit });
+        let { secret = "", encoding = "ascii", time = Date.now(), epoch = 0, period = 30, algorithm = "sha1", digits = 6 } = options;
+        const counter = Math.floor((time / 1000 - epoch) / period);
+        return this.hotp({ secret, counter, algorithm, digits, encoding });
     }
 }
 
@@ -236,40 +127,101 @@ class OTP {
     /**
      *
      * @param {Object} options
-     * @param {String} options.base -  `hotp`, or `hotp`
+     * @param {String} options.type -  `hotp`, or `totp`
      * @param {String} options.secret
-     * @param {Number} options.count=0 - used with `hotp`
+     * @param {String} options.encoding=base32 - `base32`, `ascii`, `hex`
+     * @param {Number} options.counter=0 - used with `hotp`
      * @param {String} options.algorithm=sha1 - `sha1`, `sha256`, or `sha512`
-     * @param {Number} options.digit=6
-     * @param {Number} options.time=Date.now()/1000
-     * @param {Number} options.epoch=0
-     * @param {Number} options.step=30
+     * @param {Number} options.digits=6
+     * @param {Number} options.time=Date.now()/1000 - use with `totp`
+     * @param {Number} options.epoch=0 - use with `totp`
+     * @param {Number} options.period=30 - use with `totp`
      * @returns {String}
      */
     static generate(options = {}) {
-        const { base = "hotp" } = options;
-        // base=hotp/totp
-        return Generator[base](options);
+        const { type = "hotp" } = options;
+        // type=hotp/totp
+        return Generator[type](options);
     }
 
     /**
      *
      * @param {String} token
      * @param {Object} options
-     * @param {String} options.base -  `hotp`, or `hotp`
+     * @param {String} options.type -  `hotp`, or `totp`
      * @param {String} options.secret
-     * @param {Number} options.count=0 - used with `hotp`
+     * @param {String} options.encoding=base32 - `base32`, `ascii`, `hex`
+     * @param {Number} options.counter=0 - used with `hotp`
      * @param {String} options.algorithm=sha1 - `sha1`, `sha256`, or `sha512`
-     * @param {Number} options.digit=6
-     * @param {Number} options.time=Date.now()/1000
-     * @param {Number} options.epoch=0
-     * @param {Number} options.step=30
+     * @param {Number} options.digits=6
+     * @param {Number} options.time=Date.now()/1000 - use with `totp`
+     * @param {Number} options.epoch=0 - use with `totp`
+     * @param {Number} options.period=30 - use with `totp`
      * @returns {Boolean}
      */
     static validate(token, options = {}) {
-        const { base = "hotp" } = options;
-        // base=hotp/totp
-        return Validator[base](token, options);
+        const { type = "hotp" } = options;
+        // type=hotp/totp
+        return Validator[type](token, options);
+    }
+
+    // https://www.rfc-editor.org/rfc/rfc3548
+
+    /**
+     *
+     * @param {Object} options
+     * @returns {String}
+     */
+    static randomSecret(options = {}) {
+        const { algorithm = "sha1", encoding = "base32" } = options;
+        const char =
+            "0123456789" + //
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "abcdefghijklmnopqrstuvwxyz";
+        const end = algorithm == "sha256" ? 32 : algorithm == "sha512" ? 65 : 20;
+        let string = "";
+        while (string.length < 64) {
+            string += char[Math.floor(Math.random() * 62)];
+        }
+        string = encoding == "base32" ? Crypto.base32Encode(string) : Buffer.from(string).toString(encoding);
+        return string.slice(0, end);
+    }
+
+    /**
+     *
+     * @param {Object} options
+     * @property {String} type=totp
+     * @property {String} label=label
+     * @property {String} secret=<AUTO>
+     * @property {String} encoding=base32
+     * @property {String} issuer=issuer
+     * @property {String} algorithm=sha1
+     * @property {String} digits=6
+     * @property {String} counter
+     * @property {String} period=30
+     * @returns {Object}
+     */
+    static otpauth(options = {}) {
+        let { type = "totp", label = "label", secret, encoding = "base32", issuer = "issuer", algorithm = "sha1", digits = 6, counter, period = 30 } = options;
+
+        if (!secret) {
+            secret = OTP.randomSecret({ algorithm, encoding });
+        }
+
+        let otpauth = new URL2(`otpauth://${type}/${label}`);
+        if (secret) otpauth.searchParams.set("secret", secret);
+        if (issuer) otpauth.searchParams.set("issuer", encodeURIComponent(issuer));
+        if (algorithm) otpauth.searchParams.set("algorithm", algorithm.toUpperCase());
+        if (digits) otpauth.searchParams.set("digits", digits);
+        if (counter && !type == "totp") otpauth.searchParams.set("counter", counter);
+        if (period && !type == "hotp") otpauth.searchParams.set("period", period);
+        otpauth = "" + otpauth;
+
+        let qr = new URL2(`https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr`);
+        qr.searchParams.set("chl", otpauth);
+        qr = "" + qr;
+
+        return { type, label, encoding, issuer, algorithm, digits, counter, period, secret, otpauth, qr };
     }
 }
 
@@ -277,177 +229,42 @@ OTP.Generator = Generator;
 OTP.Validator = Validator;
 module.exports = OTP;
 
-// // hotp
-// console.log(
-//     OTP.generate({
-//         base: "hotp",
-//         secret: "12345678901234567890", //default
-//         count: 0, //default
-//         algorithm: "sha1", //default
-//         digit: 6, //default
-//     })
-// );
-
-// // totp
-// console.log(
-//     OTP.generate({
-//         base: "totp",
-//         secret: "12345678901234567890",
-//         time: Date.now() / 1000, // default
-//         epoch: 0, // default
-//         step: 30, // default
-//         algorithm: "sha1", // default
-//         digit: 6, // default
-//     })
-// );
-
-// // @test
-
-// // Appendix D - HOTP Algorithm: Test Values
-
-// //    The following test data uses the ASCII string
-// //    "12345678901234567890" for the secret:
-
-// //    Secret = 0x3132333435363738393031323334353637383930
-
-// //    Table 1 details for each count, the intermediate HMAC value.
-
-// //    Count    Hexadecimal HMAC-SHA-1(secret, count)
-// //    0        cc93cf18508d94934c64b65d8ba7667fb7cde4b0
-// //    1        75a48a19d4cbe100644e8ac1397eea747a2d33ab
-// //    2        0bacb7fa082fef30782211938bc1c5e70416ff44
-// //    3        66c28227d03a2d5529262ff016a1e6ef76557ece
-// //    4        a904c900a64b35909874b33e61c5938a8e15ed1c
-// //    5        a37e783d7b7233c083d4f62926c7a25f238d0316
-// //    6        bc9cd28561042c83f219324d3c607256c03272ae
-// //    7        a4fb960c0bc06e1eabb804e5b397cdc4b45596fa
-// //    8        1b3c89f65e6c9e883012052823443f048b4332db
-// //    9        1637409809a679dc698207310c8c7fc07290d9e5
-
-// //    Table 2 details for each count the truncated values (both in
-// //    hexadecimal and decimal) and then the HOTP value.
-
-// //                      Truncated
-// //    Count    Hexadecimal    Decimal        HOTP
-// //    0        4c93cf18       1284755224     755224
-// //    1        41397eea       1094287082     287082
-// //    2         82fef30        137359152     359152
-// //    3        66ef7655       1726969429     969429
-// //    4        61c5938a       1640338314     338314
-// //    5        33c083d4        868254676     254676
-// //    6        7256c032       1918287922     287922
-// //    7         4e5b397         82162583     162583
-// //    8        2823443f        673399871     399871
-// //    9        2679dc69        645520489     520489
+// // ### Usage
 
 // var options = {
-//     base: "hotp",
-//     secret: "12345678901234567890",
-//     count: 0,
-//     algorithm: "sha1",
-//     digit: 6,
+//     type: "totp", // default
+//     label: "label", // default
+//     // secret, // pass your secret / generate new
+//     encoding: "base32", // default
+//     issuer: "issuer", // default
+//     algorithm: "sha1", // default
+//     digits: 6, // default
+//     // counter,
+//     period: 30, // default
 // };
 
-// for (let i = 0; i < 10; i++) {
-//     options.count = i;
-//     var token = OTP.generate(options);
-//     console.log(token);
-// }
+// // Create otpauth URL
+// console.log(OTP.otpauth(options));
+// // output
+// // {
+// //     type: 'totp',
+// //     label: 'label',
+// //     encoding: 'base32',
+// //     issuer: 'issuer',
+// //     algorithm: 'sha1',
+// //     digits: 6,
+// //     counter: undefined,
+// //     period: 30,
+// //     secret: 'KJUGMRJWOV2VKNTXOBYE',
+// //     otpauth: 'otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6',
+// //     qr: 'https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6'
+// //   }
 
-// // Appendix B.  Test Vectors
+// // Generate token
+// options.secret='KJUGMRJWOV2VKNTXOBYE'
+// console.log(OTP.generate(options))
 
-// //    This section provides test values that can be used for the HOTP time-
-// //    based variant algorithm interoperability test.
-
-// //    The test token shared secrets use the following ASCII string values: Expand
-// // - HMAC-SHA1: "12345678901234567890" (20 bytes)
-// // - HMAC-SHA256: "12345678901234567890123456789012" (32 bytes)
-// // - HMAC-SHA512:
-// //   "1234567890123456789012345678901234567890123456789012345678901234" (64 bytes)  With Time Step X = 30, and the Unix epoch as
-// //    the initial value to count time steps, where T0 = 0, the TOTP
-// //    algorithm will display the following values for specified modes and
-// //    timestamps.
-
-// //   +-------------+--------------+------------------+----------+--------+
-// //   |  Time (sec) |   UTC Time   | Value of T (hex) |   TOTP   |  Mode  |
-// //   +-------------+--------------+------------------+----------+--------+
-// //   |      59     |  1970-01-01  | 0000000000000001 | 94287082 |  SHA1  |
-// //   |             |   00:00:59   |                  |          |        |
-// //   |      59     |  1970-01-01  | 0000000000000001 | 46119246 | SHA256 |
-// //   |             |   00:00:59   |                  |          |        |
-// //   |      59     |  1970-01-01  | 0000000000000001 | 90693936 | SHA512 |
-// //   |             |   00:00:59   |                  |          |        |
-// //   |  1111111109 |  2005-03-18  | 00000000023523EC | 07081804 |  SHA1  |
-// //   |             |   01:58:29   |                  |          |        |
-// //   |  1111111109 |  2005-03-18  | 00000000023523EC | 68084774 | SHA256 |
-// //   |             |   01:58:29   |                  |          |        |
-// //   |  1111111109 |  2005-03-18  | 00000000023523EC | 25091201 | SHA512 |
-// //   |             |   01:58:29   |                  |          |        |
-// //   |  1111111111 |  2005-03-18  | 00000000023523ED | 14050471 |  SHA1  |
-// //   |             |   01:58:31   |                  |          |        |
-// //   |  1111111111 |  2005-03-18  | 00000000023523ED | 67062674 | SHA256 |
-// //   |             |   01:58:31   |                  |          |        |
-// //   |  1111111111 |  2005-03-18  | 00000000023523ED | 99943326 | SHA512 |
-// //   |             |   01:58:31   |                  |          |        |
-// //   |  1234567890 |  2009-02-13  | 000000000273EF07 | 89005924 |  SHA1  |
-// //   |             |   23:31:30   |                  |          |        |
-// //   |  1234567890 |  2009-02-13  | 000000000273EF07 | 91819424 | SHA256 |
-// //   |             |   23:31:30   |                  |          |        |
-// //   |  1234567890 |  2009-02-13  | 000000000273EF07 | 93441116 | SHA512 |
-// //   |             |   23:31:30   |                  |          |        |
-// //   |  2000000000 |  2033-05-18  | 0000000003F940AA | 69279037 |  SHA1  |
-// //   |             |   03:33:20   |                  |          |        |
-// //   |  2000000000 |  2033-05-18  | 0000000003F940AA | 90698825 | SHA256 |
-// //   |             |   03:33:20   |                  |          |        |
-// //   |  2000000000 |  2033-05-18  | 0000000003F940AA | 38618901 | SHA512 |
-// //   |             |   03:33:20   |                  |          |        |
-// //   | 20000000000 |  2603-10-11  | 0000000027BC86AA | 65353130 |  SHA1  |
-// //   |             |   11:33:20   |                  |          |        |
-// //   | 20000000000 |  2603-10-11  | 0000000027BC86AA | 77737706 | SHA256 |
-// //   |             |   11:33:20   |                  |          |        |
-// //   | 20000000000 |  2603-10-11  | 0000000027BC86AA | 47863826 | SHA512 |
-// //   |             |   11:33:20   |                  |          |        |
-// //   +-------------+--------------+------------------+----------+--------+
-
-// //                             Table 1: TOTP Table
-
-// var options = {
-//     base: "totp",
-//     algorithm: "sha1",
-//     digit: 6,
-//     // time: new Date(),
-//     epoch: 0,
-//     step: 30,
-// };
-
-// let secs = [
-//     //
-//     59, //
-//     1111111109,
-//     1111111111,
-//     1234567890,
-//     2000000000,
-//     20000000000,
-// ];
-// for (let i = 0; i < secs.length; i++) {
-//     const sec = secs[i];
-//     options.time = sec;
-
-//     // 20 bytes
-//     options.secret = "12345678901234567890";
-//     options.algorithm = "sha1";
-//     var token = OTP.generate(options);
-//     console.log(new Date(options.time * 1000), token);
-
-//     // 32 bytes
-//     options.secret = "12345678901234567890123456789012";
-//     options.algorithm = "sha256";
-//     var token = OTP.generate(options);
-//     console.log(new Date(options.time * 1000), token);
-
-//     // 64 bytes
-//     options.secret = "1234567890123456789012345678901234567890123456789012345678901234";
-//     options.algorithm = "sha512";
-//     var token = OTP.generate(options);
-//     console.log(new Date(options.time * 1000), token);
-// }
+// // Validate token
+// options.secret='KJUGMRJWOV2VKNTXOBYE'
+// var token = '185036'
+// console.log(OTP.validate(token,options))
