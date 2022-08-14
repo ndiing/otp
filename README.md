@@ -131,6 +131,7 @@ TOTP: Time-Based One-Time Password Algorithm
 
 #### OTP.generateSecret(options) ⇒ <code>String</code>
 **Kind**: static method of [<code>OTP</code>](#module_otp..OTP)  
+**See**: [https://www.rfc-editor.org/rfc/rfc3548](https://www.rfc-editor.org/rfc/rfc3548)  
 
 | Param | Type |
 | --- | --- |
@@ -140,6 +141,7 @@ TOTP: Time-Based One-Time Password Algorithm
 
 #### OTP.generateOtpauth(options) ⇒ <code>Object</code>
 **Kind**: static method of [<code>OTP</code>](#module_otp..OTP)  
+**See**: [https://github.com/google/google-authenticator/wiki/Key-Uri-Format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)  
 
 | Param | Type |
 | --- | --- |
