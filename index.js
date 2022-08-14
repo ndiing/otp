@@ -9,42 +9,27 @@ const { URL2 } = require("@ndiing/fetch");
  * ### Usage
  * ```js
  * var options = {
- *     type: "totp", // default
- *     label: "label", // default
- *     // secret, // pass your secret / generate new
- *     encoding: "base32", // default
- *     issuer: "issuer", // default
- *     algorithm: "sha1", // default
- *     digits: 6, // default
+ *     type: "totp",
+ *     label: "ndiing",
+ *     // secret,
+ *     encoding: "base32",
+ *     issuer: "ndiing.inc@google.com",
+ *     algorithm: "sha1",
+ *     digits: 6,
  *     // counter,
- *     period: 30, // default
+ *     period: 30,
  * };
+ * var token = OTP.generate(options);
+ * console.log({token})
  *
- * // Create otpauth URL
- * console.log(OTP.otpauth(options));
- * // output
- * // {
- * //     type: 'totp',
- * //     label: 'label',
- * //     encoding: 'base32',
- * //     issuer: 'issuer',
- * //     algorithm: 'sha1',
- * //     digits: 6,
- * //     counter: undefined,
- * //     period: 30,
- * //     secret: 'KJUGMRJWOV2VKNTXOBYE',
- * //     otpauth: 'otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6',
- * //     qr: 'https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6'
- * //   }
+ * var valid = OTP.validate(token,options);
+ * console.log({valid})
  *
- * // Generate token
- * options.secret='KJUGMRJWOV2VKNTXOBYE'
- * console.log(OTP.generate(options))
+ * var secret = OTP.generateSecret();
+ * console.log({secret})
  *
- * // Validate token
- * options.secret='KJUGMRJWOV2VKNTXOBYE'
- * var token = '185036'
- * console.log(OTP.validate(token,options))
+ * var url = OTP.generateOtpauth(options);
+ * console.log({url})
  * ```
  * @module otp
  */
@@ -68,18 +53,19 @@ class Generator {
             secret = Buffer.from(secret, encoding);
         }
 
-        const data = Buffer.alloc(8);
-        data.writeUInt32BE(counter, 4);
+        const count = Buffer.alloc(8);
+        count.writeUInt32BE(counter, 4);
 
-        const hmac = Crypto.hmac(data, { algorithm, key: secret, encoding: "hex" });
+        const hmac = Crypto.hmac(count, { algorithm, key: secret, encoding: "hex" });
 
         const offset = parseInt(hmac.charAt(hmac.length - 1), 16);
 
         let result = parseInt(hmac.substr(offset * 2, 2 * 4), 16);
         result = result & 0x7fffffff;
-        result = ("" + result).padStart(digits, 0);
+        result = ("" + result).padStart(digits, "0");
 
-        return result.substr(0 - digits);
+        // otp
+        return result.slice(0 - digits);
     }
 
     /**
@@ -90,7 +76,10 @@ class Generator {
      */
     static totp(options = {}) {
         let { secret = "", encoding = "ascii", time = Date.now(), epoch = 0, period = 30, algorithm = "sha1", digits = 6 } = options;
-        const counter = Math.floor((time / 1000 - epoch) / period);
+        time = time / 1000;
+
+        const counter = Math.floor((time - epoch) / period);
+
         return this.hotp({ secret, counter, algorithm, digits, encoding });
     }
 }
@@ -172,7 +161,7 @@ class OTP {
      * @param {Object} options
      * @returns {String}
      */
-    static randomSecret(options = {}) {
+    static generateSecret(options = {}) {
         const { algorithm = "sha1", encoding = "base32" } = options;
         const char =
             "0123456789" + //
@@ -201,27 +190,35 @@ class OTP {
      * @property {String} period=30
      * @returns {Object}
      */
-    static otpauth(options = {}) {
-        let { type = "totp", label = "label", secret, encoding = "base32", issuer = "issuer", algorithm = "sha1", digits = 6, counter, period = 30 } = options;
+    static generateOtpauth(options = {}) {
+        let {
+            //
+            type = "totp",
+            label = "label",
+            secret,
+            encoding = "base32",
+            issuer = "issuer",
+            algorithm = "sha1",
+            digits = 6,
+            counter,
+            period = 30,
+        } = options;
+        secret = secret || this.generateSecret({ algorithm, encoding });
 
-        if (!secret) {
-            secret = OTP.randomSecret({ algorithm, encoding });
-        }
+        let url = new URL2(`otpauth://${type}/${label}`);
+        if (secret) url.searchParams.set("secret", secret);
+        if (issuer) url.searchParams.set("issuer", encodeURIComponent(issuer));
+        if (algorithm) url.searchParams.set("algorithm", algorithm.toUpperCase());
+        if (digits) url.searchParams.set("digits", digits);
+        if (counter && !type == "totp") url.searchParams.set("counter", counter);
+        if (period && !type == "hotp") url.searchParams.set("period", period);
+        url = "" + url;
 
-        let otpauth = new URL2(`otpauth://${type}/${label}`);
-        if (secret) otpauth.searchParams.set("secret", secret);
-        if (issuer) otpauth.searchParams.set("issuer", encodeURIComponent(issuer));
-        if (algorithm) otpauth.searchParams.set("algorithm", algorithm.toUpperCase());
-        if (digits) otpauth.searchParams.set("digits", digits);
-        if (counter && !type == "totp") otpauth.searchParams.set("counter", counter);
-        if (period && !type == "hotp") otpauth.searchParams.set("period", period);
-        otpauth = "" + otpauth;
+        let url2 = new URL2(`https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr`);
+        url2.searchParams.set("chl", url);
+        url2 = "" + url2;
 
-        let qr = new URL2(`https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr`);
-        qr.searchParams.set("chl", otpauth);
-        qr = "" + qr;
-
-        return { type, label, encoding, issuer, algorithm, digits, counter, period, secret, otpauth, qr };
+        return url2;
     }
 }
 
@@ -230,41 +227,25 @@ OTP.Validator = Validator;
 module.exports = OTP;
 
 // // ### Usage
-
 // var options = {
-//     type: "totp", // default
-//     label: "label", // default
-//     // secret, // pass your secret / generate new
-//     encoding: "base32", // default
-//     issuer: "issuer", // default
-//     algorithm: "sha1", // default
-//     digits: 6, // default
+//     type: "totp",
+//     label: "ndiing",
+//     // secret,
+//     encoding: "base32",
+//     issuer: "ndiing.inc@google.com",
+//     algorithm: "sha1",
+//     digits: 6,
 //     // counter,
-//     period: 30, // default
+//     period: 30,
 // };
+// var token = OTP.generate(options);
+// console.log({token})
 
-// // Create otpauth URL
-// console.log(OTP.otpauth(options));
-// // output
-// // {
-// //     type: 'totp',
-// //     label: 'label',
-// //     encoding: 'base32',
-// //     issuer: 'issuer',
-// //     algorithm: 'sha1',
-// //     digits: 6,
-// //     counter: undefined,
-// //     period: 30,
-// //     secret: 'KJUGMRJWOV2VKNTXOBYE',
-// //     otpauth: 'otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6',
-// //     qr: 'https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6'
-// //   }
+// var valid = OTP.validate(token,options);
+// console.log({valid})
 
-// // Generate token
-// options.secret='KJUGMRJWOV2VKNTXOBYE'
-// console.log(OTP.generate(options))
+// var secret = OTP.generateSecret();
+// console.log({secret})
 
-// // Validate token
-// options.secret='KJUGMRJWOV2VKNTXOBYE'
-// var token = '185036'
-// console.log(OTP.validate(token,options))
+// var url = OTP.generateOtpauth(options);
+// console.log({url})

@@ -1,7 +1,7 @@
 <a name="module_otp"></a>
 
 ## otp
-### Install```npm install @ndiing/otp```### Usage```jsvar options = {    type: "totp", // default    label: "label", // default    // secret, // pass your secret / generate new    encoding: "base32", // default    issuer: "issuer", // default    algorithm: "sha1", // default    digits: 6, // default    // counter,    period: 30, // default};// Create otpauth URLconsole.log(OTP.otpauth(options));// output// {//     type: 'totp',//     label: 'label',//     encoding: 'base32',//     issuer: 'issuer',//     algorithm: 'sha1',//     digits: 6,//     counter: undefined,//     period: 30,//     secret: 'KJUGMRJWOV2VKNTXOBYE',//     otpauth: 'otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6',//     qr: 'https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/label?secret=KJUGMRJWOV2VKNTXOBYE&issuer=issuer&algorithm=SHA1&digits=6'//   }// Generate tokenoptions.secret='KJUGMRJWOV2VKNTXOBYE'console.log(OTP.generate(options))// Validate tokenoptions.secret='KJUGMRJWOV2VKNTXOBYE'var token = '185036'console.log(OTP.validate(token,options))```
+### Install```npm install @ndiing/otp```### Usage```jsvar options = {    type: "totp",    label: "ndiing",    // secret,    encoding: "base32",    issuer: "ndiing.inc@google.com",    algorithm: "sha1",    digits: 6,    // counter,    period: 30,};var token = OTP.generate(options);console.log({token})var valid = OTP.validate(token,options);console.log({valid})var secret = OTP.generateSecret();console.log({secret})var url = OTP.generateOtpauth(options);console.log({url})```
 
 
 * [otp](#module_otp)
@@ -14,8 +14,8 @@
     * [~OTP](#module_otp..OTP)
         * [.generate(options)](#module_otp..OTP.generate) ⇒ <code>String</code>
         * [.validate(token, options)](#module_otp..OTP.validate) ⇒ <code>Boolean</code>
-        * [.randomSecret(options)](#module_otp..OTP.randomSecret) ⇒ <code>String</code>
-        * [.otpauth(options)](#module_otp..OTP.otpauth) ⇒ <code>Object</code>
+        * [.generateSecret(options)](#module_otp..OTP.generateSecret) ⇒ <code>String</code>
+        * [.generateOtpauth(options)](#module_otp..OTP.generateOtpauth) ⇒ <code>Object</code>
 
 <a name="module_otp..Generator"></a>
 
@@ -87,8 +87,8 @@ TOTP: Time-Based One-Time Password Algorithm
 * [~OTP](#module_otp..OTP)
     * [.generate(options)](#module_otp..OTP.generate) ⇒ <code>String</code>
     * [.validate(token, options)](#module_otp..OTP.validate) ⇒ <code>Boolean</code>
-    * [.randomSecret(options)](#module_otp..OTP.randomSecret) ⇒ <code>String</code>
-    * [.otpauth(options)](#module_otp..OTP.otpauth) ⇒ <code>Object</code>
+    * [.generateSecret(options)](#module_otp..OTP.generateSecret) ⇒ <code>String</code>
+    * [.generateOtpauth(options)](#module_otp..OTP.generateOtpauth) ⇒ <code>Object</code>
 
 <a name="module_otp..OTP.generate"></a>
 
@@ -127,18 +127,18 @@ TOTP: Time-Based One-Time Password Algorithm
 | options.epoch | <code>Number</code> | <code>0</code> | use with `totp` |
 | options.period | <code>Number</code> | <code>30</code> | use with `totp` |
 
-<a name="module_otp..OTP.randomSecret"></a>
+<a name="module_otp..OTP.generateSecret"></a>
 
-#### OTP.randomSecret(options) ⇒ <code>String</code>
+#### OTP.generateSecret(options) ⇒ <code>String</code>
 **Kind**: static method of [<code>OTP</code>](#module_otp..OTP)  
 
 | Param | Type |
 | --- | --- |
 | options | <code>Object</code> | 
 
-<a name="module_otp..OTP.otpauth"></a>
+<a name="module_otp..OTP.generateOtpauth"></a>
 
-#### OTP.otpauth(options) ⇒ <code>Object</code>
+#### OTP.generateOtpauth(options) ⇒ <code>Object</code>
 **Kind**: static method of [<code>OTP</code>](#module_otp..OTP)  
 
 | Param | Type |
