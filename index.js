@@ -154,12 +154,11 @@ class OTP {
         return Validator[type](token, options);
     }
 
-    // https://www.rfc-editor.org/rfc/rfc3548
-
     /**
      *
      * @param {Object} options
      * @returns {String}
+     * @see {@link https://www.rfc-editor.org/rfc/rfc3548}
      */
     static generateSecret(options = {}) {
         const { algorithm = "sha1", encoding = "base32" } = options;
@@ -189,6 +188,7 @@ class OTP {
      * @property {String} counter
      * @property {String} period=30
      * @returns {Object}
+     * @see {@link https://github.com/google/google-authenticator/wiki/Key-Uri-Format}
      */
     static generateOtpauth(options = {}) {
         let {
