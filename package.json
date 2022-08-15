@@ -1,6 +1,6 @@
 {
   "name": "@ndiing/otp",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Nodejs OTP module, implement HOTP and TOTP",
   "main": "index.js",
   "scripts": {
