@@ -1,4 +1,4 @@
-# otp
+# [otp](https://ndiing.github.io/otp/)
 otp
 ### Install
 ```
