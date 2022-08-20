@@ -7,6 +7,10 @@ const { URL2 } = require("@ndiinginc/fetch");
 class Signer {
     // https://www.rfc-editor.org/rfc/rfc4226.html
 
+    
+    /**
+     * 
+     */
     static hotp(options = {}) {
         let { encoding = "ascii", secret = "", algorithm = "sha1", digits = 6, counter = 0 } = options;
         if (encoding == "base32") {
@@ -32,6 +36,10 @@ class Signer {
 
     // https://www.rfc-editor.org/rfc/rfc6238.html
 
+    
+    /**
+     * 
+     */
     static totp(options = {}) {
         let { time = Date.now(), epoch = 0, period = 30 } = options;
         time = time / 1000;
@@ -48,10 +56,18 @@ class Signer {
  * 
  */
 class Verifier {
+    
+    /**
+     * 
+     */
     static hotp(data, options = {}) {
         return data == Signer.hotp(options);
     }
 
+    
+    /**
+     * 
+     */
     static totp(data, options = {}) {
         return data == Signer.totp(options);
     }
