@@ -1,41 +1,33 @@
-# [otp](https://ndiing.github.io/otp/)
-otp
-### Install
-```
-npm install @ndiinginc/otp
-```
-### Usage
-```js
+# Signer
 
-const OTP = require('@ndiinginc/otp')
+## [Methods]()
 
-// Generate random secret
-console.log(OTP.secret({encoding:'base32'}));
-console.log(OTP.secret({encoding:'base64'}));
-console.log(OTP.secret({encoding:'hex'}));
-console.log(OTP.secret({encoding:'ascii'}));
-console.log(OTP.secret({encoding:'base32', algorithm:'sha256'}));
-console.log(OTP.secret({encoding:'base64', algorithm:'sha256'}));
-console.log(OTP.secret({encoding:'hex', algorithm:'sha256'}));
-console.log(OTP.secret({encoding:'ascii', algorithm:'sha256'}));
+[`Signer.hotp()`]()
 
-// Generate google authenticator
-console.log(OTP.authenticator());
+[`Signer.totp()`]()
 
-// Generate token
-console.log(OTP.generate({
-    type: "totp",
-    secret: "MVEFKULLOE4HURTBIFNH",
-    encoding: "base32",
-    algorithm: "sha1",
-}));
+# Verifier
 
-// Validate token
-console.log(OTP.validate('745237',{
-    type: "totp",
-    secret: "MVEFKULLOE4HURTBIFNH",
-    encoding: "base32",
-    algorithm: "sha1",
-}));
+## [Methods]()
 
-```
+[`Verifier.hotp()`]()
+
+[`Verifier.totp()`]()
+
+# OTP
+
+## [Methods]()
+
+[`OTP.generate()`]()
+
+[`OTP.validate()`]()
+
+[`OTP.secret()`]()
+
+[`OTP.authenticator()`]()
+
+# Global
+
+## [See also]()
+
+-   See also
