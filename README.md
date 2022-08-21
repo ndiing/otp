@@ -2,151 +2,89 @@
 # Signer
 
 
+<!-- examples -->
+<!-- examples -->
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+<!-- methods -->
+
+<!-- staticmethods -->
+## Static methods
 
 
-
-## [Methods]()
-
-<!-- _Methods._ -->
+[`Signer.hotp(options)`](./docs/signer/hotp.md)
 
 
-## Signer.hotp()
+[`Signer.totp(options)`](./docs/signer/totp.md)
 
 
-
-### [Syntax]()
-
-    hotp(options)
-
-
-
-## Signer.totp()
-
-
-
-### [Syntax]()
-
-    totp(options)
-
+<!-- staticmethods -->
 
 
 # Verifier
 
 
+<!-- examples -->
+<!-- examples -->
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+<!-- methods -->
+
+<!-- staticmethods -->
+## Static methods
 
 
-
-## [Methods]()
-
-<!-- _Methods._ -->
+[`Verifier.hotp(data,options)`](./docs/verifier/hotp.md)
 
 
-## Verifier.hotp()
+[`Verifier.totp(data,options)`](./docs/verifier/totp.md)
 
 
-
-### [Syntax]()
-
-    hotp(data,options)
-
-
-
-## Verifier.totp()
-
-
-
-### [Syntax]()
-
-    totp(data,options)
-
+<!-- staticmethods -->
 
 
 # OTP
 
 
+<!-- examples -->
+<!-- examples -->
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+<!-- methods -->
+
+<!-- staticmethods -->
+## Static methods
 
 
-
-## [Methods]()
-
-<!-- _Methods._ -->
+[`OTP.generate(options)`](./docs/otp/generate.md)
 
 
-## OTP.generate()
+[`OTP.validate(data,options)`](./docs/otp/validate.md)
 
 
-
-### [Syntax]()
-
-    generate(options)
-
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-options|`*`|
-
-#### [Return value]()
-
-`Any`
-
-## OTP.validate()
+[`OTP.secret(options)`](./docs/otp/secret.md)
 
 
-
-### [Syntax]()
-
-    validate(data,options)
-
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-data|`*`|
-options|`*`|
-
-#### [Return value]()
-
-`Any`
-
-## OTP.secret()
+[`OTP.authenticator(options)`](./docs/otp/authenticator.md)
 
 
-
-### [Syntax]()
-
-    secret(options)
-
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-options|`*`|
-
-#### [Return value]()
-
-`Any`
-
-## OTP.authenticator()
-
-
-
-### [Syntax]()
-
-    authenticator(options)
-
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-options|`*`|
-
-#### [Return value]()
-
-`Any`
-
-# 
-
-
-
+<!-- staticmethods -->
 

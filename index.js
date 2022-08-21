@@ -1,9 +1,13 @@
 const Crypto = require("@ndiinginc/crypto");
 const { URL2 } = require("@ndiinginc/fetch");
 
+/**
+ *
+ */
 class Signer {
-    // https://www.rfc-editor.org/rfc/rfc4226.html
-
+    /**
+     * @see {@link https://www.rfc-editor.org/rfc/rfc4226.html}
+     */
     static hotp(options = {}) {
         let { encoding = "ascii", secret = "", algorithm = "sha1", digits = 6, counter = 0 } = options;
         if (encoding == "base32") {
@@ -27,8 +31,9 @@ class Signer {
         return result;
     }
 
-    // https://www.rfc-editor.org/rfc/rfc6238.html
-
+    /**
+     * @see {@link https://www.rfc-editor.org/rfc/rfc6238.html}
+     */
     static totp(options = {}) {
         let { time = Date.now(), epoch = 0, period = 30 } = options;
         time = time / 1000;
@@ -37,27 +42,48 @@ class Signer {
     }
 }
 
+/**
+ *
+ */
 class Verifier {
+    /**
+     *
+     */
     static hotp(data, options = {}) {
         return data == Signer.hotp(options);
     }
 
+    /**
+     *
+     */
     static totp(data, options = {}) {
         return data == Signer.totp(options);
     }
 }
 
+/**
+ *
+ */
 class OTP {
+    /**
+     *
+     */
     static generate(options = {}) {
         const { type } = options;
         return Signer[type](options);
     }
 
+    /**
+     *
+     */
     static validate(data, options = {}) {
         const { type } = options;
         return Verifier[type](data, options);
     }
 
+    /**
+     *
+     */
     static secret(options = {}) {
         const { algorithm = "sha1", encoding = "base32" } = options;
         const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -73,8 +99,9 @@ class OTP {
             .toString();
     }
 
-    // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
-
+    /**
+     * @see {@link https://github.com/google/google-authenticator/wiki/Key-Uri-Format}
+     */
     static authenticator(options = {}) {
         let { type = "totp", label = "label", secret = "", encoding = "base32", issuer = "", algorithm = "sha1", digits = 6, counter = 0, period = 30 } = options;
         let url = new URL2(`otpauth://${type}/${label}?PARAMETERS`);
