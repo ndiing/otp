@@ -1,6 +1,6 @@
 # Signer
 
-<!-- Description -->
+Description
 
 
 
@@ -9,14 +9,14 @@
 
 ## [Static methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`hotp()`]()
+[`hotp()`](./docs/hotp.md)
 
-<!-- Description -->
-[`totp()`]()
 
-<!-- Description -->
+[`totp()`](./docs/totp.md)
+
+
 
 
 <!-- ## [Events]() -->
@@ -27,14 +27,16 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 # Verifier
 
-<!-- Description -->
+Description
 
 
 
@@ -43,14 +45,14 @@
 
 ## [Static methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`hotp()`]()
+[`hotp()`](./docs/hotp.md)
 
-<!-- Description -->
-[`totp()`]()
 
-<!-- Description -->
+[`totp()`](./docs/totp.md)
+
+
 
 
 <!-- ## [Events]() -->
@@ -61,14 +63,16 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 # OTP
 
-<!-- Description -->
+Description
 
 
 
@@ -77,20 +81,20 @@
 
 ## [Static methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`generate()`]()
+[`generate()`](./docs/generate.md)
 
-<!-- Description -->
-[`validate()`]()
 
-<!-- Description -->
-[`secret()`]()
+[`validate()`](./docs/validate.md)
 
-<!-- Description -->
-[`authenticator()`]()
 
-<!-- Description -->
+[`secret()`](./docs/secret.md)
+
+
+[`authenticator()`](./docs/authenticator.md)
+
+
 
 
 <!-- ## [Events]() -->
@@ -101,11 +105,13 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 
 ## [See also]()
 
