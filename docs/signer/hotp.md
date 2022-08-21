@@ -14,7 +14,6 @@ hotp(options);
 ### Parameters
 
 - `options`
-
 <!-- parameters -->
 
 <!-- return -->

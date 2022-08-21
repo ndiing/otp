@@ -14,7 +14,6 @@ generate(options);
 ### Parameters
 
 - `options`
-
 <!-- parameters -->
 
 <!-- return -->

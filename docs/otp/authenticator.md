@@ -14,7 +14,6 @@ authenticator(options);
 ### Parameters
 
 - `options`
-
 <!-- parameters -->
 
 <!-- return -->

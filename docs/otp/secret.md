@@ -14,7 +14,6 @@ secret(options);
 ### Parameters
 
 - `options`
-
 <!-- parameters -->
 
 <!-- return -->
