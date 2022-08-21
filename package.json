@@ -4,7 +4,7 @@
     "@ndiinginc/fetch": "^1.0.0"
   },
   "name": "@ndiinginc/otp",
-  "description": "[Docs](https://ndiing.github.io/otp/) ``` npm install @ndiing/otp ```",
+  "description": "Nodejs 2FA OTP Implemented HOTP&TOTP",
   "version": "1.0.1",
   "main": "index.js",
   "devDependencies": {},
