@@ -11,6 +11,10 @@ totp(options);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `options`
+
 <!-- parameters -->
 
 <!-- return -->

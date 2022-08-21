@@ -11,6 +11,10 @@ hotp(options);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `options`
+
 <!-- parameters -->
 
 <!-- return -->
