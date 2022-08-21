@@ -1,30 +1,111 @@
 # Signer
 
+<!-- Description -->
+
+
+
+
+
+
 ## [Static methods]()
 
-[`Signer.hotp()`]()
+<!-- _Description_ -->
 
-[`Signer.totp()`]()
+[`hotp()`]()
 
+<!-- Description -->
+[`totp()`]()
+
+<!-- Description -->
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 # Verifier
 
+<!-- Description -->
+
+
+
+
+
+
 ## [Static methods]()
 
-[`Verifier.hotp()`]()
+<!-- _Description_ -->
 
-[`Verifier.totp()`]()
+[`hotp()`]()
 
+<!-- Description -->
+[`totp()`]()
+
+<!-- Description -->
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 # OTP
 
+<!-- Description -->
+
+
+
+
+
+
 ## [Static methods]()
 
-[`OTP.generate()`]()
+<!-- _Description_ -->
 
-[`OTP.validate()`]()
+[`generate()`]()
 
-[`OTP.secret()`]()
+<!-- Description -->
+[`validate()`]()
 
-[`OTP.authenticator()`]()
+<!-- Description -->
+[`secret()`]()
+
+<!-- Description -->
+[`authenticator()`]()
+
+<!-- Description -->
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 
 ## [See also]()
 
