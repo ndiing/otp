@@ -1,6 +1,6 @@
 # Signer
 
-## [Methods]()
+## [Static methods]()
 
 [`Signer.hotp()`]()
 
@@ -8,7 +8,7 @@
 
 # Verifier
 
-## [Methods]()
+## [Static methods]()
 
 [`Verifier.hotp()`]()
 
@@ -16,7 +16,7 @@
 
 # OTP
 
-## [Methods]()
+## [Static methods]()
 
 [`OTP.generate()`]()
 
@@ -26,8 +26,6 @@
 
 [`OTP.authenticator()`]()
 
-# Global
-
 ## [See also]()
 
--   See also
+-   [`link`]()
