@@ -1,16 +1,9 @@
 const Crypto = require("@ndiinginc/crypto");
 const { URL2 } = require("@ndiinginc/fetch");
 
-/**
- * 
- */
 class Signer {
     // https://www.rfc-editor.org/rfc/rfc4226.html
 
-    
-    /**
-     * 
-     */
     static hotp(options = {}) {
         let { encoding = "ascii", secret = "", algorithm = "sha1", digits = 6, counter = 0 } = options;
         if (encoding == "base32") {
@@ -36,10 +29,6 @@ class Signer {
 
     // https://www.rfc-editor.org/rfc/rfc6238.html
 
-    
-    /**
-     * 
-     */
     static totp(options = {}) {
         let { time = Date.now(), epoch = 0, period = 30 } = options;
         time = time / 1000;
@@ -48,63 +37,27 @@ class Signer {
     }
 }
 
-// console.log(Signer.hotp({
-//     secret:'12345678901234567890'
-// }))
-
-/**
- * 
- */
 class Verifier {
-    
-    /**
-     * 
-     */
     static hotp(data, options = {}) {
         return data == Signer.hotp(options);
     }
 
-    
-    /**
-     * 
-     */
     static totp(data, options = {}) {
         return data == Signer.totp(options);
     }
 }
 
-/**
- * 
- */
 class OTP {
-
-    /**
-     * 
-     * @param {*} options 
-     * @returns {Any}
-     */
     static generate(options = {}) {
         const { type } = options;
         return Signer[type](options);
     }
 
-
-    /**
-     * 
-     * @param {*} data 
-     * @param {*} options 
-     * @returns {Any}
-     */
     static validate(data, options = {}) {
         const { type } = options;
         return Verifier[type](data, options);
     }
 
-    /**
-     * 
-     * @param {*} options 
-     * @returns {Any}
-     */
     static secret(options = {}) {
         const { algorithm = "sha1", encoding = "base32" } = options;
         const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -122,12 +75,6 @@ class OTP {
 
     // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
 
-
-    /**
-     * 
-     * @param {*} options 
-     * @returns {Any}
-     */
     static authenticator(options = {}) {
         let { type = "totp", label = "label", secret = "", encoding = "base32", issuer = "", algorithm = "sha1", digits = 6, counter = 0, period = 30 } = options;
         let url = new URL2(`otpauth://${type}/${label}?PARAMETERS`);
@@ -141,7 +88,6 @@ class OTP {
         url = "" + url;
 
         let qr = new URL2("https://www.google.com/chart?chs=256x256&chld=M|0&cht=qr");
-        // &chl=
         qr.searchParams.set("chl", url);
         qr = "" + qr;
         return qr;
