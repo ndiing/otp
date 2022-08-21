@@ -18,12 +18,6 @@
 
     hotp(options)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Signer.totp()
@@ -34,12 +28,6 @@ name|type|defaultvalue
 
     totp(options)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 # Verifier
@@ -61,12 +49,6 @@ name|type|defaultvalue
 
     hotp(data,options)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Verifier.totp()
@@ -77,12 +59,6 @@ name|type|defaultvalue
 
     totp(data,options)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 # OTP
