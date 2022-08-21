@@ -1,93 +1,176 @@
-## Classes
 
-<dl>
-<dt><a href="#Signer">Signer</a></dt>
-<dd></dd>
-<dt><a href="#Verifier">Verifier</a></dt>
-<dd></dd>
-<dt><a href="#OTP">OTP</a></dt>
-<dd></dd>
-</dl>
+# Signer
 
-<a name="Signer"></a>
 
-## Signer
-**Kind**: global class  
 
-* [Signer](#Signer)
-    * [.hotp()](#Signer.hotp)
-    * [.totp()](#Signer.totp)
 
-<a name="Signer.hotp"></a>
+
+## [Methods]()
+
+<!-- _Methods._ -->
+
 
 ### Signer.hotp()
-**Kind**: static method of [<code>Signer</code>](#Signer)  
-<a name="Signer.totp"></a>
+
+
+
+#### [Syntax]()
+
+    hotp(options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
 
 ### Signer.totp()
-**Kind**: static method of [<code>Signer</code>](#Signer)  
-<a name="Verifier"></a>
 
-## Verifier
-**Kind**: global class  
 
-* [Verifier](#Verifier)
-    * [.hotp()](#Verifier.hotp)
-    * [.totp()](#Verifier.totp)
 
-<a name="Verifier.hotp"></a>
+#### [Syntax]()
+
+    totp(options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+# Verifier
+
+
+
+
+
+## [Methods]()
+
+<!-- _Methods._ -->
+
 
 ### Verifier.hotp()
-**Kind**: static method of [<code>Verifier</code>](#Verifier)  
-<a name="Verifier.totp"></a>
+
+
+
+#### [Syntax]()
+
+    hotp(data,options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
 
 ### Verifier.totp()
-**Kind**: static method of [<code>Verifier</code>](#Verifier)  
-<a name="OTP"></a>
 
-## OTP
-**Kind**: global class  
 
-* [OTP](#OTP)
-    * [.generate(options)](#OTP.generate) ⇒ <code>Any</code>
-    * [.validate(data, options)](#OTP.validate) ⇒ <code>Any</code>
-    * [.secret(options)](#OTP.secret) ⇒ <code>Any</code>
-    * [.authenticator(options)](#OTP.authenticator) ⇒ <code>Any</code>
 
-<a name="OTP.generate"></a>
+#### [Syntax]()
 
-### OTP.generate(options) ⇒ <code>Any</code>
-**Kind**: static method of [<code>OTP</code>](#OTP)  
+    totp(data,options)
 
-| Param | Type |
-| --- | --- |
-| options | <code>\*</code> | 
+##### [Parameters]()
 
-<a name="OTP.validate"></a>
+name|type|defaultvalue
+---|---|---
 
-### OTP.validate(data, options) ⇒ <code>Any</code>
-**Kind**: static method of [<code>OTP</code>](#OTP)  
+##### [Return value]()
 
-| Param | Type |
-| --- | --- |
-| data | <code>\*</code> | 
-| options | <code>\*</code> | 
 
-<a name="OTP.secret"></a>
+# OTP
 
-### OTP.secret(options) ⇒ <code>Any</code>
-**Kind**: static method of [<code>OTP</code>](#OTP)  
 
-| Param | Type |
-| --- | --- |
-| options | <code>\*</code> | 
 
-<a name="OTP.authenticator"></a>
 
-### OTP.authenticator(options) ⇒ <code>Any</code>
-**Kind**: static method of [<code>OTP</code>](#OTP)  
 
-| Param | Type |
-| --- | --- |
-| options | <code>\*</code> | 
+## [Methods]()
+
+<!-- _Methods._ -->
+
+
+### OTP.generate()
+
+
+
+#### [Syntax]()
+
+    generate(options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+options|`*`|
+
+##### [Return value]()
+
+`Any`
+
+### OTP.validate()
+
+
+
+#### [Syntax]()
+
+    validate(data,options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+data|`*`|
+options|`*`|
+
+##### [Return value]()
+
+`Any`
+
+### OTP.secret()
+
+
+
+#### [Syntax]()
+
+    secret(options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+options|`*`|
+
+##### [Return value]()
+
+`Any`
+
+### OTP.authenticator()
+
+
+
+#### [Syntax]()
+
+    authenticator(options)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+options|`*`|
+
+##### [Return value]()
+
+`Any`
+
+# 
+
+
+
 
