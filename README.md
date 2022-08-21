@@ -10,36 +10,36 @@
 <!-- _Methods._ -->
 
 
-### Signer.hotp()
+## Signer.hotp()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     hotp(options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Signer.totp()
+## Signer.totp()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     totp(options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
 # Verifier
@@ -53,36 +53,36 @@ name|type|defaultvalue
 <!-- _Methods._ -->
 
 
-### Verifier.hotp()
+## Verifier.hotp()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     hotp(data,options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Verifier.totp()
+## Verifier.totp()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     totp(data,options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
 # OTP
@@ -96,76 +96,76 @@ name|type|defaultvalue
 <!-- _Methods._ -->
 
 
-### OTP.generate()
+## OTP.generate()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     generate(options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 options|`*`|
 
-##### [Return value]()
+#### [Return value]()
 
 `Any`
 
-### OTP.validate()
+## OTP.validate()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     validate(data,options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 data|`*`|
 options|`*`|
 
-##### [Return value]()
+#### [Return value]()
 
 `Any`
 
-### OTP.secret()
+## OTP.secret()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     secret(options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 options|`*`|
 
-##### [Return value]()
+#### [Return value]()
 
 `Any`
 
-### OTP.authenticator()
+## OTP.authenticator()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     authenticator(options)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 options|`*`|
 
-##### [Return value]()
+#### [Return value]()
 
 `Any`
 
