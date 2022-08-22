@@ -6,6 +6,9 @@ npm install @ndiinginc/otp
 
 ## Global
 
+<!-- constructor -->
+<!-- constructor -->
+
 <!-- properties -->
 <!-- properties -->
 
@@ -21,6 +24,9 @@ npm install @ndiinginc/otp
 <!-- examples -->
 <!-- examples -->
 ## Signer
+
+<!-- constructor -->
+<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
@@ -45,6 +51,9 @@ npm install @ndiinginc/otp
 <!-- examples -->
 ## Verifier
 
+<!-- constructor -->
+<!-- constructor -->
+
 <!-- properties -->
 <!-- properties -->
 
@@ -67,6 +76,9 @@ npm install @ndiinginc/otp
 <!-- examples -->
 <!-- examples -->
 ## OTP
+
+<!-- constructor -->
+<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
