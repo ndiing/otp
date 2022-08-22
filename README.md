@@ -4,6 +4,22 @@
 npm install @ndiinginc/otp
 ```
 
+## Global
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+<!-- methods -->
+
+<!-- staticmethods -->
+<!-- staticmethods -->
+
+<!-- examples -->
+<!-- examples -->
 ## Signer
 
 <!-- properties -->
