@@ -17,3 +17,6 @@ authenticator(options)
 </dl>
 
 
+### See also
+- [https://github.com/google/google-authenticator/wiki/Key-Uri-Format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)
+
