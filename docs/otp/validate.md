@@ -1,21 +1,20 @@
-# OTP.validate()
+## OTP.validate()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-validate(data,options);
+### Syntax
+```
+validate(data,options)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>data</code></dt>
+    <dt><code>options</code></dt>
+</dl>
 
-- `data`
-- `options`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

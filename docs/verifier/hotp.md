@@ -1,21 +1,20 @@
-# Verifier.hotp()
+## Verifier.hotp()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-hotp(data,options);
+### Syntax
+```
+hotp(data,options)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>data</code></dt>
+    <dt><code>options</code></dt>
+</dl>
 
-- `data`
-- `options`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

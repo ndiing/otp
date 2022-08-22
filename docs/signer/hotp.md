@@ -1,20 +1,19 @@
-# Signer.hotp()
+## Signer.hotp()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-hotp(options);
+### Syntax
+```
+hotp(options)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>options</code></dt>
+</dl>
 
-- `options`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

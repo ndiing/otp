@@ -1,20 +1,19 @@
-# OTP.generate()
+## OTP.generate()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-generate(options);
+### Syntax
+```
+generate(options)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>options</code></dt>
+</dl>
 
-- `options`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

@@ -6,7 +6,7 @@ const { URL2 } = require("@ndiinginc/fetch");
  */
 class Signer {
     /**
-     * @see {@link https://www.rfc-editor.org/rfc/rfc4226.html}
+     * @see https://www.rfc-editor.org/rfc/rfc4226.html
      */
     static hotp(options = {}) {
         let { encoding = "ascii", secret = "", algorithm = "sha1", digits = 6, counter = 0 } = options;
@@ -32,7 +32,7 @@ class Signer {
     }
 
     /**
-     * @see {@link https://www.rfc-editor.org/rfc/rfc6238.html}
+     * @see https://www.rfc-editor.org/rfc/rfc6238.html
      */
     static totp(options = {}) {
         let { time = Date.now(), epoch = 0, period = 30 } = options;
@@ -100,7 +100,7 @@ class OTP {
     }
 
     /**
-     * @see {@link https://github.com/google/google-authenticator/wiki/Key-Uri-Format}
+     * @see https://github.com/google/google-authenticator/wiki/Key-Uri-Format
      */
     static authenticator(options = {}) {
         let { type = "totp", label = "label", secret = "", encoding = "base32", issuer = "", algorithm = "sha1", digits = 6, counter = 0, period = 30 } = options;

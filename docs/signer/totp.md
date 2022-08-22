@@ -1,20 +1,19 @@
-# Signer.totp()
+## Signer.totp()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-totp(options);
+### Syntax
+```
+totp(options)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>options</code></dt>
+</dl>
 
-- `options`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+
