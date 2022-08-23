@@ -4,6 +4,10 @@
 npm install @ndiinginc/otp
 ```
 
+
+<!-- examples -->
+<!-- examples -->
+
 ## Signer
 
 <!-- constructor -->
@@ -30,6 +34,7 @@ npm install @ndiinginc/otp
 
 <!-- examples -->
 <!-- examples -->
+
 ## Verifier
 
 <!-- constructor -->
@@ -56,6 +61,7 @@ npm install @ndiinginc/otp
 
 <!-- examples -->
 <!-- examples -->
+
 ## OTP
 
 <!-- constructor -->
@@ -83,6 +89,3 @@ npm install @ndiinginc/otp
     <dd></dd>
 </dl>
 <!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
