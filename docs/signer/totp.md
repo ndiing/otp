@@ -9,11 +9,11 @@ totp(options)
 ### Parameters
 <dl>
     <dt><code>options</code></dt>
-    <dd>A <code>Object</code> options, The default is <code></code></dd>
+    <dd>A <code>Object</code> options</dd>
     <dt><code>options.time</code></dt>
     <dd>A <code>Number</code> set time, The default is <code>Date.now()</code></dd>
     <dt><code>options.epoch</code></dt>
-    <dd>A <code>Number</code> set epoch, The default is <code>0</code></dd>
+    <dd>A <code>Number</code> set epoch</dd>
     <dt><code>options.period</code></dt>
     <dd>A <code>Number</code> set period, The default is <code>30</code></dd>
 </dl>
