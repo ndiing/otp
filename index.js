@@ -6,6 +6,13 @@ const { URL2 } = require("@ndiinginc/fetch");
  */
 class Signer {
     /**
+     * An HMAC-Based One-Time Password Algorithm
+     * @param {Object} options - options
+     * @param {String} options.encoding=ascii - set encoding
+     * @param {String} options.secret - set secret
+     * @param {String} options.algorithm=sha1 - set algorithm
+     * @param {Number} options.digits=6 - set digits
+     * @param {Number} options.counter=0 - set counter
      * @see https://www.rfc-editor.org/rfc/rfc4226.html
      */
     static hotp(options = {}) {
@@ -32,6 +39,11 @@ class Signer {
     }
 
     /**
+     * Time-Based One-Time Password Algorithm
+     * @param {Object} options - options
+     * @param {Number} options.time=Date.now() - set time
+     * @param {Number} options.epoch=0 - set epoch
+     * @param {Number} options.period=30 - set period
      * @see https://www.rfc-editor.org/rfc/rfc6238.html
      */
     static totp(options = {}) {
