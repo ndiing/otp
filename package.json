@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "@ndiinginc/crypto": "^1.0.0",
-    "@ndiinginc/fetch": "^1.0.0"
+    "@ndiinginc/crypto": "^1.0.3",
+    "@ndiinginc/fetch": "^1.0.12"
   },
   "name": "@ndiinginc/otp",
   "description": "Nodejs 2FA OTP Implemented HOTP&TOTP",
