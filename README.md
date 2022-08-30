@@ -1,88 +1,133 @@
-# Install
+# otp
 
-```
-npm install @ndiinginc/otp
-```
 
-## Signer
+### Index
+- Signer
 
-<!-- constructor -->
-<!-- constructor -->
+    <!-- properties -->
+    <!-- properties -->
+    <!-- staticproperties -->
+    <!-- staticproperties -->
+    <!-- methods -->
+    <!-- methods -->
+    <!-- staticmethods -->
+    - Static methods
+        - [`Signer.hotp`](#astnode100000019)
+        - [`Signer.totp`](#astnode100000161)
+    <!-- staticmethods -->
+    <!-- events -->
+    <!-- events -->
+- Verifier
 
-<!-- properties -->
-<!-- properties -->
+    <!-- properties -->
+    <!-- properties -->
+    <!-- staticproperties -->
+    <!-- staticproperties -->
+    <!-- methods -->
+    <!-- methods -->
+    <!-- staticmethods -->
+    - Static methods
+        - [`Verifier.hotp`](#astnode100000216)
+        - [`Verifier.totp`](#astnode100000232)
+    <!-- staticmethods -->
+    <!-- events -->
+    <!-- events -->
+- OTP
 
-<!-- staticproperties -->
-<!-- staticproperties -->
+    <!-- properties -->
+    <!-- properties -->
+    <!-- staticproperties -->
+    <!-- staticproperties -->
+    <!-- methods -->
+    <!-- methods -->
+    <!-- staticmethods -->
+    - Static methods
+        - [`OTP.generate`](#astnode100000251)
+        - [`OTP.validate`](#astnode100000270)
+        - [`OTP.secret`](#astnode100000291)
+        - [`OTP.authenticator`](#astnode100000386)
+    <!-- staticmethods -->
+    <!-- events -->
+    <!-- events -->
 
-<!-- methods -->
-<!-- methods -->
+# Signer
 
-<!-- staticmethods -->
-### Static Methods
-<dl>
-    <dt><code><a href="./docs/signer/hotp.md">Signer.hotp()</a></code></dt>
-    <dd>An HMAC-Based One-Time Password Algorithm</dd>
-    <dt><code><a href="./docs/signer/totp.md">Signer.totp()</a></code></dt>
-    <dd>Time-Based One-Time Password Algorithm</dd>
-</dl>
-<!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
-## Verifier
-
-<!-- constructor -->
-<!-- constructor -->
-
-<!-- properties -->
-<!-- properties -->
-
-<!-- staticproperties -->
-<!-- staticproperties -->
-
-<!-- methods -->
-<!-- methods -->
-
-<!-- staticmethods -->
-### Static Methods
-<dl>
-    <dt><code><a href="./docs/verifier/hotp.md">Verifier.hotp()</a></code></dt>
-    <dd></dd>
-    <dt><code><a href="./docs/verifier/totp.md">Verifier.totp()</a></code></dt>
-    <dd></dd>
-</dl>
-<!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
-## OTP
-
-<!-- constructor -->
-<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
-
 <!-- staticproperties -->
 <!-- staticproperties -->
-
 <!-- methods -->
 <!-- methods -->
+<!-- staticmethods -->
+### Static methods
+
+<div><a href="./docs/astnode100000019.md" name="astnode100000019"><code>Signer.hotp(options)</code></a></div>
+An HMAC-Based One-Time Password Algorithm
+
+<div><a href="./docs/astnode100000161.md" name="astnode100000161"><code>Signer.totp(options)</code></a></div>
+Time-Based One-Time Password Algorithm
 
 <!-- staticmethods -->
-### Static Methods
-<dl>
-    <dt><code><a href="./docs/otp/generate.md">OTP.generate()</a></code></dt>
-    <dd></dd>
-    <dt><code><a href="./docs/otp/validate.md">OTP.validate()</a></code></dt>
-    <dd></dd>
-    <dt><code><a href="./docs/otp/secret.md">OTP.secret()</a></code></dt>
-    <dd></dd>
-    <dt><code><a href="./docs/otp/authenticator.md">OTP.authenticator()</a></code></dt>
-    <dd></dd>
-</dl>
-<!-- staticmethods -->
+<!-- events -->
+<!-- events -->
 
 <!-- examples -->
 <!-- examples -->
+
+# Verifier
+
+
+<!-- properties -->
+<!-- properties -->
+<!-- staticproperties -->
+<!-- staticproperties -->
+<!-- methods -->
+<!-- methods -->
+<!-- staticmethods -->
+### Static methods
+
+<div><a href="./docs/astnode100000216.md" name="astnode100000216"><code>Verifier.hotp(data,options)</code></a></div>
+
+
+<div><a href="./docs/astnode100000232.md" name="astnode100000232"><code>Verifier.totp(data,options)</code></a></div>
+
+
+<!-- staticmethods -->
+<!-- events -->
+<!-- events -->
+
+<!-- examples -->
+<!-- examples -->
+
+# OTP
+
+
+<!-- properties -->
+<!-- properties -->
+<!-- staticproperties -->
+<!-- staticproperties -->
+<!-- methods -->
+<!-- methods -->
+<!-- staticmethods -->
+### Static methods
+
+<div><a href="./docs/astnode100000251.md" name="astnode100000251"><code>OTP.generate(options)</code></a></div>
+
+
+<div><a href="./docs/astnode100000270.md" name="astnode100000270"><code>OTP.validate(data,options)</code></a></div>
+
+
+<div><a href="./docs/astnode100000291.md" name="astnode100000291"><code>OTP.secret(options)</code></a></div>
+
+
+<div><a href="./docs/astnode100000386.md" name="astnode100000386"><code>OTP.authenticator(options)</code></a></div>
+
+
+<!-- staticmethods -->
+<!-- events -->
+<!-- events -->
+
+<!-- examples -->
+<!-- examples -->
+
