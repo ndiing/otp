@@ -58,6 +58,9 @@ npm install @ndiinginc/otp
 # Signer
 
 
+<!-- constructor -->
+<!-- constructor -->
+
 <!-- properties -->
 <!-- properties -->
 <!-- staticproperties -->
@@ -83,6 +86,9 @@ Time-Based One-Time Password Algorithm
 # Verifier
 
 
+<!-- constructor -->
+<!-- constructor -->
+
 <!-- properties -->
 <!-- properties -->
 <!-- staticproperties -->
@@ -107,6 +113,9 @@ Time-Based One-Time Password Algorithm
 
 # OTP
 
+
+<!-- constructor -->
+<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
