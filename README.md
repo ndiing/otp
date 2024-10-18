@@ -1,50 +1,42 @@
-## Functions
+<a name="module_otp"></a>
 
-<dl>
-<dt><a href="#hotp">hotp(options)</a> ⇒ <code>string</code></dt>
-<dd><p>Menghitung One-Time Password (OTP) berdasarkan HMAC-based One-Time Password (HOTP)
-menggunakan parameter yang diberikan.</p>
-</dd>
-<dt><a href="#totp">totp(options)</a> ⇒ <code>string</code></dt>
-<dd><p>Menghitung One-Time Password (OTP) berdasarkan Time-based One-Time Password (TOTP)
-menggunakan parameter yang diberikan.</p>
-</dd>
-</dl>
+## otp
 
-<a name="hotp"></a>
+* [otp](#module_otp)
+    * [.hotp([options])](#module_otp.hotp) ⇒ <code>string</code>
+    * [.totp([options])](#module_otp.totp) ⇒ <code>string</code>
 
-## hotp(options) ⇒ <code>string</code>
+<a name="module_otp.hotp"></a>
 
-Menghitung One-Time Password (OTP) berdasarkan HMAC-based One-Time Password (HOTP)
-menggunakan parameter yang diberikan.
+### otp.hotp([options]) ⇒ <code>string</code>
+Menghasilkan HMAC-based One-Time Password (HOTP) berdasarkan secret dan nilai penghitung.
 
-**Kind**: global function  
-**Returns**: <code>string</code> - OTP yang dihasilkan.
+**Kind**: static method of [<code>otp</code>](#module_otp)  
+**Returns**: <code>string</code> - - Mengembalikan HOTP dalam bentuk string dengan panjang yang ditentukan oleh `digits`.  
 
-| Param               | Type                | Default                                     | Description                                          |
-| ------------------- | ------------------- | ------------------------------------------- | ---------------------------------------------------- |
-| options             | <code>Object</code> |                                             | Opsi untuk menghasilkan OTP.                         |
-| options.secret      | <code>string</code> |                                             | Kunci rahasia yang digunakan untuk menghasilkan OTP. |
-| options.count       | <code>number</code> |                                             | Hitungan yang digunakan untuk menghitung OTP.        |
-| [options.algorithm] | <code>string</code> | <code>&quot;\&quot;sha1\&quot;&quot;</code> | Algoritma hashing yang digunakan (default: "sha1").  |
-| [options.digits]    | <code>number</code> | <code>6</code>                              | Jumlah digit dalam OTP (default: 6).                 |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>Object</code> | <code>{}</code> | Opsi untuk menghasilkan HOTP. |
+| options.secret | <code>string</code> |  | Kunci rahasia yang digunakan untuk menghasilkan OTP. |
+| options.count | <code>number</code> |  | Nilai penghitung yang terus meningkat. |
+| [options.algorithm] | <code>string</code> | <code>&quot;&#x27;sha1&#x27;&quot;</code> | Algoritma hash yang digunakan untuk HMAC ('sha1', 'sha256', atau 'sha512'). |
+| [options.digits] | <code>number</code> | <code>6</code> | Jumlah digit pada OTP yang dihasilkan. |
 
-<a name="totp"></a>
+<a name="module_otp.totp"></a>
 
-## totp(options) ⇒ <code>string</code>
+### otp.totp([options]) ⇒ <code>string</code>
+Menghasilkan Time-based One-Time Password (TOTP) berdasarkan secret dan waktu saat ini.
 
-Menghitung One-Time Password (OTP) berdasarkan Time-based One-Time Password (TOTP)
-menggunakan parameter yang diberikan.
+**Kind**: static method of [<code>otp</code>](#module_otp)  
+**Returns**: <code>string</code> - - Mengembalikan TOTP dalam bentuk string dengan panjang yang ditentukan oleh `digits`.  
 
-**Kind**: global function  
-**Returns**: <code>string</code> - OTP yang dihasilkan.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>Object</code> | <code>{}</code> | Opsi untuk menghasilkan TOTP. |
+| options.secret | <code>string</code> |  | Kunci rahasia yang digunakan untuk menghasilkan OTP. |
+| [options.T] | <code>number</code> | <code>Math.floor(Date.now() / 1000)</code> | Waktu dalam detik. Default adalah waktu saat ini dalam detik. |
+| [options.T0] | <code>number</code> | <code>0</code> | Waktu awal (epoch time). Default adalah 0. |
+| [options.X] | <code>number</code> | <code>30</code> | Interval waktu (dalam detik) antara setiap TOTP. Default adalah 30 detik. |
+| [options.algorithm] | <code>string</code> | <code>&quot;&#x27;sha1&#x27;&quot;</code> | Algoritma hash yang digunakan untuk HMAC ('sha1', 'sha256', atau 'sha512'). |
+| [options.digits] | <code>number</code> | <code>6</code> | Jumlah digit pada OTP yang dihasilkan. |
 
-| Param               | Type                | Default                                     | Description                                           |
-| ------------------- | ------------------- | ------------------------------------------- | ----------------------------------------------------- |
-| options             | <code>Object</code> |                                             | Opsi untuk menghasilkan OTP.                          |
-| options.secret      | <code>string</code> |                                             | Kunci rahasia yang digunakan untuk menghasilkan OTP.  |
-| [options.T]         | <code>number</code> | <code>Math.floor(Date.now() / 1000)</code>  | Waktu saat ini dalam detik (default: waktu sekarang). |
-| [options.T0]        | <code>number</code> | <code>0</code>                              | Waktu awal dalam detik (default: 0).                  |
-| [options.X]         | <code>number</code> | <code>30</code>                             | Interval waktu dalam detik (default: 30).             |
-| [options.algorithm] | <code>string</code> | <code>&quot;\&quot;sha1\&quot;&quot;</code> | Algoritma hashing yang digunakan (default: "sha1").   |
-| [options.digits]    | <code>number</code> | <code>6</code>                              | Jumlah digit dalam OTP (default: 6).                  |
