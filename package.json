@@ -1,8 +1,8 @@
 {
   "name": "@ndiinginc/otp",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./src/otp.js",
   "scripts": {
     "test": "jest",
     "test:live": "jest --watchAll",
